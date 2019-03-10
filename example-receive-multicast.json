@@ -1,0 +1,25 @@
+{
+  "ietf-taps-api:preconnection":{
+    "properties":[
+      {
+        "type":"remote-host",
+        "preference":"require",
+        "host":["192.0.2.15"]
+      },
+      {
+        "type":"local-address",
+        "preference":"require",
+        "address":["232.252.0.2"]
+      },
+      {
+        "type":"local-port",
+        "preference":"require",
+        "port":["30000"]
+      },
+      {
+        "type":"udp",
+        "preference":"require"
+      }
+    ]
+  }
+}

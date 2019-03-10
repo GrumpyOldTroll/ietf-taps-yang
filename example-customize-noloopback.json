@@ -1,0 +1,16 @@
+{
+  "ietf-taps-api:preconnection":{
+    "properties":[
+      {
+        "type":"remote-host",
+        "preference":"require",
+        "host":["example.com"]
+      },
+      {
+        "type":"local-interface-selection",
+        "preference":"prohibit",
+        "ifref":["lo0"]
+      }
+    ]
+  }
+}
