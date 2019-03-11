@@ -105,6 +105,12 @@ module ietf-taps-api {
       "Identity for the port of a local endpoint";
   }
 
+  identity stun-server {
+    base local-endpoint-property;
+    description
+      "Identity for using a stun server";
+  }
+
   identity remote-endpoint-property {
     base connection-config-property;
     description "Base identity for remote endpoint properties";
@@ -302,19 +308,84 @@ module ietf-taps-api {
     }
   }
 
+  grouping transport-property-info {
+    description "grouping of transport info, used by preconnection
+        and connection";
+
+    leaf type {
+      type identityref {
+        base "connection-config-property";
+      }
+      description "type of the property";
+    }
+
+    leaf-list iftype {
+      when "derived-from-or-self(../type,
+          'taps:local-interface-selection')";
+      type identityref {
+        base "ianaift:iana-interface-type";
+      }
+      description "interface type constraint for local
+        interface selection";
+      reference "RFC 7224 Section 2";
+    }
+
+    leaf-list ifref {
+      when "derived-from-or-self(../type,
+          'taps:local-interface-selection')";
+      type if:interface-ref {
+        require-instance false;
+      }
+      description "specific interface constraint for local
+        interface selection.";
+    }
+
+    leaf-list address {
+      when "derived-from-or-self(../type,
+          'taps:local-address')";
+      type inet:ip-address;
+      description "ip address of local endpoint";
+    }
+
+    leaf-list port {
+      when "derived-from-or-self(../type,
+          'taps:local-port') or 
+            derived-from-or-self(../type,
+          'taps:remote-port')";
+      type inet:port-number;
+      description "port value of an endpoint port";
+    }
+
+    leaf-list host {
+      when "derived-from-or-self(../type,
+          'taps:remote-host')";
+      type inet:host;
+      description "host value of a remote endpoint";
+    }
+
+    container stun-info {
+      when "derived-from-or-self(../type,
+          'taps:stun-server')";
+      description "config for the stun server";
+
+      leaf host {
+        type inet:host;
+        description "stun server host";
+      }
+      leaf port {
+        type inet:port-number;
+        description "port number for the stun server";
+      }
+      uses security-credentials;
+    }
+  }
+
   container preconnection {
-    /* config true; */
     description "preconnection config for a taps connection";
     list properties {
       key "type preference";
       description "list of transport property constraints.";
 
-      leaf type {
-        type identityref {
-          base "connection-config-property";
-        }
-        description "type of the property";
-      }
       leaf preference {
         type preference-level;
         /* TBD: would be nice if i could set default and have
@@ -323,49 +394,7 @@ module ietf-taps-api {
         description "preference level for the property";
       }
 
-      leaf-list iftype {
-        when "derived-from-or-self(../type,
-            'taps:local-interface-selection')";
-        type identityref {
-          base "ianaift:iana-interface-type";
-        }
-        description "interface type constraint for local
-          interface selection";
-        reference "RFC 7224 Section 2";
-      }
-
-      leaf-list ifref {
-        when "derived-from-or-self(../type,
-            'taps:local-interface-selection')";
-        type if:interface-ref {
-          require-instance false;
-        }
-        description "specific interface constraint for local
-          interface selection.";
-      }
-
-      leaf-list address {
-        when "derived-from-or-self(../type,
-            'taps:local-address')";
-        type inet:ip-address;
-        description "ip address of local endpoint";
-      }
-
-      leaf-list port {
-        when "derived-from-or-self(../type,
-            'taps:local-port') or 
-              derived-from-or-self(../type,
-            'taps:remote-port')";
-        type inet:port-number;
-        description "port value of an endpoint port";
-      }
-
-      leaf-list host {
-        when "derived-from-or-self(../type,
-            'taps:remote-host')";
-        type inet:host;
-        description "host value of a remote endpoint";
-      }
+      uses transport-property-info;
     }
 
     container security {
@@ -385,6 +414,17 @@ module ietf-taps-api {
         type uint32;
         description "Number of seconds of session cache lifetime";
       }
+    }
+  }
+
+  container connection {
+    config false;
+
+    description "information about connections";
+    list properties {
+      description "list of transport properties for live connections.";
+
+      uses transport-property-info;
     }
   }
 }

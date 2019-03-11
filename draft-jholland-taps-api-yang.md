@@ -1,7 +1,7 @@
 ---
 title: A YANG Data Model for a Transport Services API at Endpoints
 abbrev: TAPS API Yang Model
-docname: draft-jholland-taps-api-yang-01
+docname: draft-jholland-taps-api-yang-02
 date: 2019-03-09
 category: std
 
@@ -167,6 +167,16 @@ any-source multicast.
 YANG-DATA ietf-taps-api.yang example-receive-multicast.json
 ~~~
 {: #yang-data-rx-multicast title="PreConnection for Source-specific Multicast Receive"}
+
+## Connecting Through a Stun Server
+
+STUN server connections are a local-endpoint property, and
+can be configured the same way.
+
+~~~
+YANG-DATA ietf-taps-api.yang example-stun-server.json
+~~~
+{: #yang-data-stun title="Connect through a STUN server"}
 
 # YANG Module {#yang-module}
 
