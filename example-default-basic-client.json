@@ -1,23 +1,15 @@
 {
   "ietf-taps-api:preconnection":{
-    "properties":[
+    "remote-endpoints":[
       {
-        "type":"remote-host",
-        "host":["example.com"],
-        "preference":"require"
-      },
-      {
-        "type":"reliable",
-        "preference":"require"
-      },
-      {
-        "type":"preserve-order",
-        "preference":"require"
-      },
-      {
-        "type":"congestion-control",
-        "preference":"require"
+        "id":"option1",
+        "remote-host":"example.com"
       }
-    ]
+    ],
+    "transport-properties":{
+        "reliability":"require",
+        "preserve-order":"require",
+        "congestion-control":"require"
+    }
   }
 }

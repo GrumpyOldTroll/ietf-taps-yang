@@ -1,8 +1,8 @@
 ---
 title: A YANG Data Model for a Transport Services API at Endpoints
 abbrev: TAPS API Yang Model
-docname: draft-jholland-taps-api-yang-02
-date: 2019-03-09
+docname: draft-jholland-taps-api-yang-03
+date: 2019-07-07
 category: std
 
 ipr: trust200902
@@ -127,17 +127,6 @@ or app preferences of some kind.
 
 These examples demonstrates adding constraints on the endpoints when
 opening a connection.
-
-### Prohibit Specific Interface
-
-In this example, an app needs to avoid using a local proxy for a
-specific set of connections, so it might configure those connections
-to prohibit connecting through a specific loopback interface:
-
-~~~
-YANG-DATA ietf-taps-api.yang example-customize-noloopback.json
-~~~
-{: #yang-data-customize-noloopback title="Customized to avoid lo0"}
 
 ### Require Wi-Fi
 

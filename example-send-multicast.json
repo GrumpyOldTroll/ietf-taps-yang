@@ -1,25 +1,22 @@
 {
   "ietf-taps-api:preconnection":{
-    "properties":[
+    "local-endpoints":[
       {
-        "type":"local-address",
-        "preference":"require",
-        "address":["192.0.2.15"]
-      },
-      {
-        "type":"remote-host",
-        "preference":"require",
-        "host":["232.252.0.2"]
-      },
-      {
-        "type":"remote-port",
-        "preference":"require",
-        "port":["30000"]
-      },
-      {
-        "type":"udp",
-        "preference":"require"
+        "id":"option1",
+        "local-address":"192.0.2.15"
       }
-    ]
+    ],
+    "remote-endpoints":[
+      {
+        "id":"option1",
+        "remote-host":"232.252.0.2",
+        "remote-port":"30000"
+      }
+    ],
+    "transport-properties": {
+      "congestion-control":"ignore",
+      "reliability":"ignore",
+      "preserve-order":"ignore"
+    }
   }
 }
