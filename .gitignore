@@ -15,4 +15,6 @@ pulls.json
 report.xml
 lib
 *.withyang
+*.yangdeps
+tmp-negative.out
 modules/

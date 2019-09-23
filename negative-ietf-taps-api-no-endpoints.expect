@@ -1,0 +1,3 @@
++ yanglint -f json -t data -D -s -V -p modules -p . ietf-taps-api.yang negative-ietf-taps-api-no-endpoints.json
+err : Must condition "count(//preconnection/local-endpoints) > 0 or
+count(//preconnection/remote-endpoints) > 0" not satisfied. (/ietf-taps-api:preconnection)

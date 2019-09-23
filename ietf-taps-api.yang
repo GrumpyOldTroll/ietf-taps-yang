@@ -232,6 +232,9 @@ module ietf-taps-api {
   }
 
   container preconnection {
+    must "count(//preconnection/local-endpoints) > 0 or
+      count(//preconnection/remote-endpoints) > 0";
+
     description "preconnection config for a taps connection";
 
     list local-endpoints {
